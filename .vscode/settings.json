@@ -1,9 +1,9 @@
 {
-    "[solidity]": {
+    "1[solidity]": {
         "editor.defaultFormatter": "NomicFoundation.hardhat-solidity"
     },
-    "[javascript]": {
+    "1[javascript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
-    "editor.formatOnSave": true
+    "1editor.formatOnSave": true
 }
