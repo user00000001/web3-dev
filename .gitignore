@@ -1,5 +1,8 @@
 *.bin
 *.abi
 
+.encryptedKey.json
+
+.env
 node_modules
 pnpm-lock.yaml
