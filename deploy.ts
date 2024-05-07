@@ -1,13 +1,19 @@
-const ethers = require("ethers");
-const fs = require("fs-extra");
-require("dotenv").config(); // or by shell export environments
+// const ethers = require("ethers");
+// const fs = require("fs-extra");
+// require("dotenv").config(); // or by shell export environments
 
+import { ethers } from "ethers";
+import fs from "fs-extra";
+import dotenv from "dotenv";
+import { SimpleStorage_sol_SimpleStorage } from "./SimpleStorage_sol_SimpleStorage";
+
+dotenv.config();
 async function main() {
   const provider = new ethers.JsonRpcProvider(process.env.RPC_URL);
   const encryptedJson = fs.readFileSync("./.encryptedKey.json", "utf8");
   let wallet = ethers.Wallet.fromEncryptedJsonSync(
     encryptedJson,
-    process.env.PRIVATE_KEY_PASSWORD,
+    process.env.PRIVATE_KEY_PASSWORD!,
   );
   wallet = wallet.connect(provider);
   const abi = fs.readFileSync("./SimpleStorage_sol_SimpleStorage.abi", "utf8");
@@ -17,11 +23,13 @@ async function main() {
   );
   const contractFactory = new ethers.ContractFactory(abi, binary, wallet);
   console.log("Deploying, please wait...");
-  const contract = await contractFactory.deploy({ gasPrice: 20000000000 });
+  const contract = (await contractFactory.deploy({
+    gasPrice: 20000000000,
+  })) as SimpleStorage_sol_SimpleStorage;
   console.log(contract);
   const deployTx = contract.deploymentTransaction();
   console.log(deployTx);
-  const deploymentReceipt = await deployTx.wait(1);
+  const deploymentReceipt = await deployTx!.wait(1);
   console.log(deploymentReceipt);
 
   // const currentFavoriteNumber = await contract.retrieve();
