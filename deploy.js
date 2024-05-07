@@ -7,13 +7,13 @@ async function main() {
   const encryptedJson = fs.readFileSync("./.encryptedKey.json", "utf8");
   let wallet = ethers.Wallet.fromEncryptedJsonSync(
     encryptedJson,
-    process.env.PRIVATE_KEY_PASSWORD
+    process.env.PRIVATE_KEY_PASSWORD,
   );
   wallet = wallet.connect(provider);
   const abi = fs.readFileSync("./SimpleStorage_sol_SimpleStorage.abi", "utf8");
   const binary = fs.readFileSync(
     "./SimpleStorage_sol_SimpleStorage.bin",
-    "utf8"
+    "utf8",
   );
   const contractFactory = new ethers.ContractFactory(abi, binary, wallet);
   console.log("Deploying, please wait...");
@@ -32,7 +32,6 @@ async function main() {
   console.log(storeReceipt);
   const currentFavoriteNumber = await contract.retrieve();
   console.log(currentFavoriteNumber.toString());
-
 
   console.log("let's deploy with only transaction data!(signed then send)");
   const nonce = await wallet.getNonce();
