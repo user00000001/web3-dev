@@ -24,9 +24,10 @@ pnpm hardhat console --network localhost
 # preset: Object.keys(global), like hre, ethers, network, tasks, etc.
 ```
 
-## test
+## test & coverage
 
 ```shell
 pnpm hardhat test
 pnpm hardhat test --grep store
+pnpm hardhat coverage
 ```
