@@ -31,3 +31,10 @@ pnpm hardhat test
 pnpm hardhat test --grep store
 pnpm hardhat coverage
 ```
+
+## convert to typescript
+
+```shell
+pnpm i -D ts-node typescript
+pnpm hardhat typechain
+```

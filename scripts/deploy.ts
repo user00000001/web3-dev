@@ -1,4 +1,5 @@
-const { ethers, run, network } = require("hardhat");
+import { ethers, run, network } from "hardhat";
+import { SimpleStorage, SimpleStorage__factory } from "../typechain-types";
 
 // for etherscan connection.
 
@@ -7,12 +8,12 @@ const { ethers, run, network } = require("hardhat");
 // setGlobalDispatcher(proxyAgent)
 
 async function main() {
-    const SimpleStorageFactory = await ethers.getContractFactory("SimpleStorage");
-    const simpleStorage = await SimpleStorageFactory.deploy();
+    const SimpleStorageFactory: SimpleStorage__factory = (await ethers.getContractFactory("SimpleStorage")) as unknown as SimpleStorage__factory;
+    const simpleStorage: SimpleStorage = await SimpleStorageFactory.deploy();
     await simpleStorage.waitForDeployment();
     console.log(`${JSON.stringify(simpleStorage)}\n${network.config.chainId}`);
     if (network.config.chainId === 11155111 && process.env.ETHERSCAN_API_KEY) {
-        await verify(simpleStorage.target, []);
+        await verify(simpleStorage.target as string, []);
         // await verify("0x2d78438A084C9651d9228efBE75B5e1189d4c7e4", [])
     }
     const currentValue = await simpleStorage.retrieve();
@@ -22,14 +23,14 @@ async function main() {
     console.log(`Current Value is: ${currentValue1.toString()}`);
 }
 
-async function verify(contractAddress, args) {
+async function verify(contractAddress: string, args: any[]) {
     console.log(`${contractAddress} ${JSON.stringify(args)}`);
     try {
         await run("verify:verify", {
             address: contractAddress,
             constructorArguments: args,
         });
-    } catch(e) {
+    } catch(e: any) {
         if(e.message.toLowerCase().includes("already verified")) {
             console.log("Already Verified!")
         } else {

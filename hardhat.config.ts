@@ -1,7 +1,7 @@
-require("@nomicfoundation/hardhat-toolbox");
-require("dotenv").config();
-require("@nomicfoundation/hardhat-verify");
-require("./tasks/block-number");
+import "@nomicfoundation/hardhat-toolbox";
+import "dotenv/config";
+import "@nomicfoundation/hardhat-verify";
+import "./tasks/block-number";
 // require("solidity-coverage");
 
 /** @type import('hardhat/config').HardhatUserConfig */
