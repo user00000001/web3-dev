@@ -1,8 +1,9 @@
 import { assert, expect } from "chai";
-import { ethers, deployments, getNamedAccounts } from "hardhat";
+import { ethers, deployments, getNamedAccounts, network } from "hardhat";
 import { FundMe, MockV3Aggregator } from "../../typechain-types";
+import { developmentChains } from "../../helper-hardhat-config";
 
-describe("FundMe", async function () {
+!developmentChains.includes(network.name) ? describe.skip : describe("FundMe", async function () {
     let fundMe: FundMe, deployer: string, mockV3Aggregator: MockV3Aggregator;
     const sendValue = ethers.utils.parseEther("1"); // 1e18.toString()
     beforeEach(async function () {
