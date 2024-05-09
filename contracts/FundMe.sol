@@ -59,6 +59,19 @@ contract FundMe {
         if(!callSuccess) revert CallFailure();
     }
 
+    function cheaperWithdraw() public onlyOwner {
+        address[] memory m_funders = funders;
+        // mappings can't be in memory, sorry!
+        for(uint256 funderIndex=0; funderIndex < m_funders.length; funderIndex++) {
+            address funder = m_funders[funderIndex];
+            addressToAmountFunded[funder] = 0;
+        }
+        funders = new address[](0);
+        (bool callSuccess, ) = payable(msg.sender).call{value: address(this).balance}("");
+        // require(callSuccess, "Call failed");
+        if(!callSuccess) revert CallFailure();
+    }
+
     // Explainer from: https://solidity-by-example.org/fallback/
     // Ether is sent to contract
     //      is msg.data empty?
