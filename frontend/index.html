@@ -7,12 +7,15 @@
 </head>
 <body>
     <div>Hi, this is FundMe!</div>
-    <script src="./index.js" type="module">
-    </script>
+    <script src="./index.js" type="module"></script>
     <button id="connectButton" type="button">Connect to Wallet</button>
     <button id="fundButton" type="button">Fund</button>
     <br/>
     <label for="fund"> ETH Amount </label>
     <input id="fund" placeholder="0.1"></input>
+    <br/>
+    <button id="accountBalance">GetBalance</button>
+    <input type="text" style="width: 300px" id="accountAddr"></input>
+    <div id="balanceShow">0</div>
 </body>
 </html>
