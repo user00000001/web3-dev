@@ -3,11 +3,13 @@ import { abi, contractAddr } from "./constants.js";
 
 const connectButton = document.getElementById("connectButton")
 const fundButton = document.getElementById("fundButton")
+const withdrawButton = document.getElementById("withdrawButton")
 const balanceButton = document.getElementById("accountBalance")
 const balanceShow = document.getElementById("balanceShow")
 const addr = document.getElementById("accountAddr");
 connectButton.onclick = connection;
 fundButton.onclick = fund;
+withdrawButton.onclick = withdraw;
 balanceButton.onclick = balance;
 addr.width = "30%";
 addr.value = contractAddr;
@@ -66,5 +68,26 @@ async function balance() {
         console.log("No ethereum wallet!")
         connectButton.innerText = "Please install MetaMask"
     }
+}
 
+async function withdraw() {
+    if(window.ethereum) {
+        await window.ethereum.request({method: "eth_requestAccounts"});
+        connectButton.innerText = "Connected!"
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = provider.getSigner();
+        console.log(signer);
+        const fundMe = new ethers.Contract(contractAddr, abi, signer);
+        try {
+            const txResp = await fundMe.withdraw();
+            // const txRcpt = await txResp.wait(1);
+            await listenForTransactionMine(txResp, provider)
+            console.log("Done")
+        } catch(e) {
+            console.log(e)
+        }
+    } else {
+        console.log("No ethereum wallet!")
+        connectButton.innerText = "Please install MetaMask"
+    }
 }
