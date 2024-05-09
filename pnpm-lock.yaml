@@ -16,16 +16,16 @@ devDependencies:
     version: 5.7.2
   '@nomicfoundation/hardhat-chai-matchers':
     specifier: ^1.0.0
-    version: 1.0.6(@nomiclabs/hardhat-ethers@2.2.3)(chai@4.4.1)(ethers@5.7.2)(hardhat@2.14.1)
+    version: 1.0.6(chai@4.4.1)(ethers@5.7.2)(hardhat-deploy-ethers@0.3.0-beta.13)(hardhat@2.14.1)
   '@nomicfoundation/hardhat-network-helpers':
     specifier: ^1.0.0
     version: 1.0.10(hardhat@2.14.1)
   '@nomicfoundation/hardhat-toolbox':
     specifier: ^2.0.0
-    version: 2.0.2(@ethersproject/abi@5.7.0)(@ethersproject/providers@5.7.2)(@nomicfoundation/hardhat-chai-matchers@1.0.6)(@nomicfoundation/hardhat-network-helpers@1.0.10)(@nomiclabs/hardhat-ethers@2.2.3)(@nomiclabs/hardhat-etherscan@3.1.8)(@typechain/ethers-v5@10.2.1)(@typechain/hardhat@6.1.6)(@types/chai@4.3.16)(@types/mocha@10.0.6)(@types/node@20.12.10)(chai@4.4.1)(ethers@5.7.2)(hardhat-gas-reporter@1.0.10)(hardhat@2.14.1)(solidity-coverage@0.8.12)(ts-node@10.9.2)(typechain@8.3.2)(typescript@5.4.5)
+    version: 2.0.2(@ethersproject/abi@5.7.0)(@ethersproject/providers@5.7.2)(@nomicfoundation/hardhat-chai-matchers@1.0.6)(@nomicfoundation/hardhat-network-helpers@1.0.10)(@nomiclabs/hardhat-etherscan@3.1.8)(@typechain/ethers-v5@10.2.1)(@typechain/hardhat@6.1.6)(@types/chai@4.3.16)(@types/mocha@10.0.6)(@types/node@20.12.10)(chai@4.4.1)(ethers@5.7.2)(hardhat-deploy-ethers@0.3.0-beta.13)(hardhat-gas-reporter@1.0.10)(hardhat@2.14.1)(solidity-coverage@0.8.12)(ts-node@10.9.2)(typechain@8.3.2)(typescript@5.4.5)
   '@nomiclabs/hardhat-ethers':
-    specifier: ^2.0.0
-    version: 2.2.3(ethers@5.7.2)(hardhat@2.14.1)
+    specifier: npm:hardhat-deploy-ethers@0.3.0-beta.13
+    version: /hardhat-deploy-ethers@0.3.0-beta.13(ethers@5.7.2)(hardhat@2.14.1)
   '@nomiclabs/hardhat-etherscan':
     specifier: ^3.0.0
     version: 3.1.8(hardhat@2.14.1)
@@ -51,7 +51,7 @@ devDependencies:
     specifier: ^16.4.5
     version: 16.4.5
   ethers:
-    specifier: ^5.4.7
+    specifier: ^5.7.2
     version: 5.7.2
   hardhat:
     specifier: ~2.14.1
@@ -861,7 +861,7 @@ packages:
       - utf-8-validate
     dev: true
 
-  /@nomicfoundation/hardhat-chai-matchers@1.0.6(@nomiclabs/hardhat-ethers@2.2.3)(chai@4.4.1)(ethers@5.7.2)(hardhat@2.14.1):
+  /@nomicfoundation/hardhat-chai-matchers@1.0.6(chai@4.4.1)(ethers@5.7.2)(hardhat-deploy-ethers@0.3.0-beta.13)(hardhat@2.14.1):
     resolution: {integrity: sha512-f5ZMNmabZeZegEfuxn/0kW+mm7+yV7VNDxLpMOMGXWFJ2l/Ct3QShujzDRF9cOkK9Ui/hbDeOWGZqyQALDXVCQ==}
     peerDependencies:
       '@nomiclabs/hardhat-ethers': ^2.0.0
@@ -870,7 +870,7 @@ packages:
       hardhat: ^2.9.4
     dependencies:
       '@ethersproject/abi': 5.7.0
-      '@nomiclabs/hardhat-ethers': 2.2.3(ethers@5.7.2)(hardhat@2.14.1)
+      '@nomiclabs/hardhat-ethers': /hardhat-deploy-ethers@0.3.0-beta.13(ethers@5.7.2)(hardhat@2.14.1)
       '@types/chai-as-promised': 7.1.8
       chai: 4.4.1
       chai-as-promised: 7.1.1(chai@4.4.1)
@@ -889,7 +889,7 @@ packages:
       hardhat: 2.14.1(ts-node@10.9.2)(typescript@5.4.5)
     dev: true
 
-  /@nomicfoundation/hardhat-toolbox@2.0.2(@ethersproject/abi@5.7.0)(@ethersproject/providers@5.7.2)(@nomicfoundation/hardhat-chai-matchers@1.0.6)(@nomicfoundation/hardhat-network-helpers@1.0.10)(@nomiclabs/hardhat-ethers@2.2.3)(@nomiclabs/hardhat-etherscan@3.1.8)(@typechain/ethers-v5@10.2.1)(@typechain/hardhat@6.1.6)(@types/chai@4.3.16)(@types/mocha@10.0.6)(@types/node@20.12.10)(chai@4.4.1)(ethers@5.7.2)(hardhat-gas-reporter@1.0.10)(hardhat@2.14.1)(solidity-coverage@0.8.12)(ts-node@10.9.2)(typechain@8.3.2)(typescript@5.4.5):
+  /@nomicfoundation/hardhat-toolbox@2.0.2(@ethersproject/abi@5.7.0)(@ethersproject/providers@5.7.2)(@nomicfoundation/hardhat-chai-matchers@1.0.6)(@nomicfoundation/hardhat-network-helpers@1.0.10)(@nomiclabs/hardhat-etherscan@3.1.8)(@typechain/ethers-v5@10.2.1)(@typechain/hardhat@6.1.6)(@types/chai@4.3.16)(@types/mocha@10.0.6)(@types/node@20.12.10)(chai@4.4.1)(ethers@5.7.2)(hardhat-deploy-ethers@0.3.0-beta.13)(hardhat-gas-reporter@1.0.10)(hardhat@2.14.1)(solidity-coverage@0.8.12)(ts-node@10.9.2)(typechain@8.3.2)(typescript@5.4.5):
     resolution: {integrity: sha512-vnN1AzxbvpSx9pfdRHbUzTRIXpMLPXnUlkW855VaDk6N1pwRaQ2gNzEmFAABk4lWf11E00PKwFd/q27HuwYrYg==}
     peerDependencies:
       '@ethersproject/abi': ^5.4.7
@@ -914,9 +914,9 @@ packages:
     dependencies:
       '@ethersproject/abi': 5.7.0
       '@ethersproject/providers': 5.7.2
-      '@nomicfoundation/hardhat-chai-matchers': 1.0.6(@nomiclabs/hardhat-ethers@2.2.3)(chai@4.4.1)(ethers@5.7.2)(hardhat@2.14.1)
+      '@nomicfoundation/hardhat-chai-matchers': 1.0.6(chai@4.4.1)(ethers@5.7.2)(hardhat-deploy-ethers@0.3.0-beta.13)(hardhat@2.14.1)
       '@nomicfoundation/hardhat-network-helpers': 1.0.10(hardhat@2.14.1)
-      '@nomiclabs/hardhat-ethers': 2.2.3(ethers@5.7.2)(hardhat@2.14.1)
+      '@nomiclabs/hardhat-ethers': /hardhat-deploy-ethers@0.3.0-beta.13(ethers@5.7.2)(hardhat@2.14.1)
       '@nomiclabs/hardhat-etherscan': 3.1.8(hardhat@2.14.1)
       '@typechain/ethers-v5': 10.2.1(@ethersproject/abi@5.7.0)(@ethersproject/providers@5.7.2)(ethers@5.7.2)(typechain@8.3.2)(typescript@5.4.5)
       '@typechain/hardhat': 6.1.6(@ethersproject/abi@5.7.0)(@ethersproject/providers@5.7.2)(@typechain/ethers-v5@10.2.1)(ethers@5.7.2)(hardhat@2.14.1)(typechain@8.3.2)
@@ -1041,16 +1041,6 @@ packages:
       '@nomicfoundation/solidity-analyzer-win32-arm64-msvc': 0.1.1
       '@nomicfoundation/solidity-analyzer-win32-ia32-msvc': 0.1.1
       '@nomicfoundation/solidity-analyzer-win32-x64-msvc': 0.1.1
-    dev: true
-
-  /@nomiclabs/hardhat-ethers@2.2.3(ethers@5.7.2)(hardhat@2.14.1):
-    resolution: {integrity: sha512-YhzPdzb612X591FOe68q+qXVXGG2ANZRvDo0RRUtimev85rCrAlv/TLMEZw5c+kq9AbzocLTVX/h2jVIFPL9Xg==}
-    peerDependencies:
-      ethers: ^5.0.0
-      hardhat: ^2.0.0
-    dependencies:
-      ethers: 5.7.2
-      hardhat: 2.14.1(ts-node@10.9.2)(typescript@5.4.5)
     dev: true
 
   /@nomiclabs/hardhat-etherscan@3.1.8(hardhat@2.14.1):
@@ -2942,6 +2932,16 @@ packages:
       wordwrap: 1.0.0
     optionalDependencies:
       uglify-js: 3.17.4
+    dev: true
+
+  /hardhat-deploy-ethers@0.3.0-beta.13(ethers@5.7.2)(hardhat@2.14.1):
+    resolution: {integrity: sha512-PdWVcKB9coqWV1L7JTpfXRCI91Cgwsm7KLmBcwZ8f0COSm1xtABHZTyz3fvF6p42cTnz1VM0QnfDvMFlIRkSNw==}
+    peerDependencies:
+      ethers: ^5.0.0
+      hardhat: ^2.0.0
+    dependencies:
+      ethers: 5.7.2
+      hardhat: 2.14.1(ts-node@10.9.2)(typescript@5.4.5)
     dev: true
 
   /hardhat-deploy@0.9.29(@ethersproject/hardware-wallets@5.7.0)(hardhat@2.14.1):

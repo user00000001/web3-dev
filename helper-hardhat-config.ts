@@ -10,7 +10,7 @@ const networkConfig = {
 
 const developmentChains = ["hardhat", "localhost"];
 const DECIMALS = 8;
-const INITIAL_ANSWER = 1e8;
+const INITIAL_ANSWER = 2e11;
 
 export {
     networkConfig,
