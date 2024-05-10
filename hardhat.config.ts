@@ -1,6 +1,9 @@
-import { HardhatUserConfig } from "hardhat/config";
+import "@nomiclabs/hardhat-ethers";
+import "@typechain/hardhat";
 import "hardhat-deploy";
 import "dotenv/config";
+
+import { HardhatUserConfig } from "hardhat/config";
 
 const config: HardhatUserConfig = {
   // solidity: "0.8.18",

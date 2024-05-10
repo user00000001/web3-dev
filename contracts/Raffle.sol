@@ -79,16 +79,16 @@ contract Raffle is VRFConsumerBaseV2, KeeperCompatibleInterface {
         emit RequestedRaffleWinner(requestId);
     }
 
-    function requestRandomWinner() external {
-        uint256 requestId = i_vrfCoordinator.requestRandomWords(
-            i_gasLane,
-            i_subscriptionId,
-            REQUEST_CONFIRMATIONS,
-            i_callbackGasLimit,
-            NUM_WORDS
-        );
-        emit RequestedRaffleWinner(requestId);
-    }
+    // function requestRandomWinner() external {
+    //     uint256 requestId = i_vrfCoordinator.requestRandomWords(
+    //         i_gasLane,
+    //         i_subscriptionId,
+    //         REQUEST_CONFIRMATIONS,
+    //         i_callbackGasLimit,
+    //         NUM_WORDS
+    //     );
+    //     emit RequestedRaffleWinner(requestId);
+    // }
 
     function fulfillRandomWords(uint256 /* requestId */, uint256[] memory randomWords) internal override {
         uint256 indexOfWinner = randomWords[0] % s_players.length;
@@ -120,5 +120,17 @@ contract Raffle is VRFConsumerBaseV2, KeeperCompatibleInterface {
 
     function getNumWords() public pure returns (uint256) {
         return NUM_WORDS;
+    }
+
+    function getNumberOfPlayers() public view returns (uint256) {
+        return s_players.length;
+    }
+
+    function getLatestTimeStamp() public view returns (uint256) {
+        return s_lastTimeStamp;
+    }
+
+    function getRequestConfirmations() public pure returns (uint256) {
+        return REQUEST_CONFIRMATIONS;
     }
 }
