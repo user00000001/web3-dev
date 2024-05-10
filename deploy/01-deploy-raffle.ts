@@ -11,9 +11,15 @@ const VRF_SUB_FUND_AMOUNT = ethers.utils.parseEther("30");
 module.exports = async ({ getNamedAccounts, deployments, network }: HardhatRuntimeEnvironment) => {
     const { deploy, log } = deployments;
     const { deployer } = await getNamedAccounts();
-    let vrfCoordinatorV2Address, entranceFee, gasLane, subscriptionId, callbackGasLimit, interval;
+    let vrfCoordinatorV2Address: string, 
+    vrfCoordinatorV2Mock: VRFCoordinatorV2Mock, 
+    entranceFee: BigNumber, 
+    gasLane: string, 
+    subscriptionId: string, 
+    callbackGasLimit: string, 
+    interval: string;
     if (developmentChains.includes(network.name)) {
-        const vrfCoordinatorV2Mock: VRFCoordinatorV2Mock = await ethers.getContract("VRFCoordinatorV2Mock");
+        vrfCoordinatorV2Mock = await ethers.getContract("VRFCoordinatorV2Mock");
         vrfCoordinatorV2Address = vrfCoordinatorV2Mock.address;
         const txResp = await vrfCoordinatorV2Mock.createSubscription();
         const txRcpt = await txResp.wait(1);
@@ -24,6 +30,8 @@ module.exports = async ({ getNamedAccounts, deployments, network }: HardhatRunti
             [key: number]: {
                 vrfCoordinatorV2?: string,
             }})[network.config.chainId!]["vrfCoordinatorV2"]!;
+        subscriptionId = ""
+        vrfCoordinatorV2Mock = await ethers.getContract("VRFCoordinatorV2Mock");
     }
     entranceFee = (networkConfig as {
         [key: number]: {
@@ -43,7 +51,7 @@ module.exports = async ({ getNamedAccounts, deployments, network }: HardhatRunti
         }})[network.config.chainId!]["interval"]!;
     const args = [
         vrfCoordinatorV2Address,
-        entranceFee,
+        entranceFee.toString(),
         gasLane,
         subscriptionId,
         callbackGasLimit,
@@ -60,6 +68,11 @@ module.exports = async ({ getNamedAccounts, deployments, network }: HardhatRunti
         await verify(raffle.address, args)
     }
     log("------------------------")
+    if (developmentChains.includes(network.name)) {
+        await vrfCoordinatorV2Mock.addConsumer(subscriptionId, raffle.address);
+        log('Consumer is added');
+    }
+    log("------------------------")
 }
 
-module.exports.tags = ["all", "rafffle"]
+module.exports.tags = ["all", "raffle"]

@@ -1,6 +1,9 @@
 import "@nomiclabs/hardhat-ethers";
+import "@nomiclabs/hardhat-waffle";
 import "@typechain/hardhat";
 import "hardhat-deploy";
+import "hardhat-gas-reporter";
+import "solidity-coverage";
 import "dotenv/config";
 
 import { HardhatUserConfig } from "hardhat/config";
@@ -35,9 +38,12 @@ const config: HardhatUserConfig = {
   etherscan: {
     apiKey: process.env.ETHERSCAN_API_KEY
   },
-  // gasReporter: {
-  //   enabled: true
-  // }
+  gasReporter: {
+    enabled: true
+  },
+  mocha: {
+    timeout: 200000
+  }
 };
 
 export default config;
