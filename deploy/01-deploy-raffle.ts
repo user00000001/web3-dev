@@ -11,8 +11,9 @@ const VRF_SUB_FUND_AMOUNT = ethers.utils.parseEther("30");
 module.exports = async ({ getNamedAccounts, deployments, network }: HardhatRuntimeEnvironment) => {
     const { deploy, log } = deployments;
     const { deployer } = await getNamedAccounts();
-    let vrfCoordinatorV2Address: string, 
-    vrfCoordinatorV2Mock: VRFCoordinatorV2Mock, 
+    let vrfCoordinatorV2Address: string,
+    // @ts-ignore
+    vrfCoordinatorV2Mock: VRFCoordinatorV2Mock = "", 
     entranceFee: BigNumber, 
     gasLane: string, 
     subscriptionId: string, 
@@ -30,8 +31,7 @@ module.exports = async ({ getNamedAccounts, deployments, network }: HardhatRunti
             [key: number]: {
                 vrfCoordinatorV2?: string,
             }})[network.config.chainId!]["vrfCoordinatorV2"]!;
-        subscriptionId = ""
-        vrfCoordinatorV2Mock = await ethers.getContract("VRFCoordinatorV2Mock");
+        subscriptionId = "51115538415181763257872941889490908716294351060333594023821624322196006772795" // chainlink vrf v2.5, v2 is unavailable ?
     }
     entranceFee = (networkConfig as {
         [key: number]: {
