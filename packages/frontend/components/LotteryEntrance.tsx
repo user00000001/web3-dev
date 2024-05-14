@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { useWeb3Contract, useMoralis, useMoralisWeb3Api } from 'react-moralis';
+import { useWeb3Contract, useMoralis } from 'react-moralis';
 import { abi, contractAddresses } from '../constants';
 import { useNotification } from 'web3uikit';
-import { BigNumber, ethers, ContractTransaction } from "ethers";
+import { BigNumber, ethers, ContractTransaction, utils } from "ethers";
 
 interface contractAddressesInterfacee {
   [key: string]: string[]
@@ -10,12 +10,13 @@ interface contractAddressesInterfacee {
 
 function LotteryEntrance() {
   const addresses: contractAddressesInterfacee = contractAddresses;
-  const { chainId: chainIdHex, isWeb3Enabled } = useMoralis();
+  const { chainId: chainIdHex, isWeb3Enabled, web3 } = useMoralis();
   const chainId: string = parseInt(chainIdHex!).toString();
   const raffleAddress = chainId in addresses ? addresses[chainId][0]: null;
   const [EntranceFee, setEntranceFee] = useState("0");
   const [NumPlayers, setNumPlayers] = useState("0");
   const [RecentWinner, setRecentWinner] = useState("0");
+  const [RaffleBalance, setRaffleBalance] = useState("0");
 
   const dispatch = useNotification();
 
@@ -56,9 +57,11 @@ function LotteryEntrance() {
     const entranceFeeFromCall = ((await getEntranceFee()) as BigNumber).toString()
     const numPlayersFromCall = ((await getNumberOfPlayers()) as BigNumber).toString()
     const recentWinnerFromCall = (await getRecentWinner()) as string;
+    const balance = utils.formatUnits(await web3?.getBalance(raffleAddress!)!, "ether");
     setEntranceFee(entranceFeeFromCall)
     setNumPlayers(numPlayersFromCall)
     setRecentWinner(recentWinnerFromCall)
+    setRaffleBalance(balance);
   }
 
   useEffect(() => {
@@ -87,7 +90,7 @@ function LotteryEntrance() {
     <div className='p-5'>Hi from LotteryEntrance!
     {raffleAddress ? (
       <div className=''>
-        RaffleV2_5({ raffleAddress })
+        RaffleV2_5({ raffleAddress }): { RaffleBalance } ETH.
         <br />
         <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-auto' onClick={async function(){
           await EnterRaffle({
