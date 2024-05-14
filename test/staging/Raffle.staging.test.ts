@@ -19,7 +19,7 @@ developmentChains.includes(network.name) ? describe.skip : describe("Raffle Unit
         raffleEntranceFee = await raffle.getEntranceFee();
     });
     describe("fulfillRandomWords", function(){
-        let accounts;
+        let accounts: any [];
         beforeEach(async function () {
             accounts = await ethers.getSigners();
         })

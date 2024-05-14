@@ -1,37 +1,39 @@
 import { ethers } from "hardhat";
 import { HardhatRuntimeEnvironment } from "hardhat/types";
 import { developmentChains, networkConfig } from "../helper-hardhat-config";
-import { VRFCoordinatorV2Mock } from "../typechain-types";
+import { VRFCoordinatorV2_5Mock } from "../typechain-types";
 import { verify } from "../utils/verify";
 
 import type { BigNumber } from "ethers"; 
 
 const VRF_SUB_FUND_AMOUNT = ethers.utils.parseEther("30");
 
-module.exports = async ({ getNamedAccounts, deployments, network }: HardhatRuntimeEnvironment) => {
+module.exports = async ({ getNamedAccounts, deployments, network, artifacts }: HardhatRuntimeEnvironment) => {
     const { deploy, log } = deployments;
     const { deployer } = await getNamedAccounts();
-    let vrfCoordinatorV2Address: string,
-    // @ts-ignore
-    vrfCoordinatorV2Mock: VRFCoordinatorV2Mock = "", 
+    let vrfCoordinatorV2_5Address: string,
+    vrfCoordinatorV2_5Mock: VRFCoordinatorV2_5Mock,
     entranceFee: BigNumber, 
     gasLane: string, 
     subscriptionId: string, 
     callbackGasLimit: string, 
-    interval: string;
+    interval: string,
+    nativePayment: string;
+    // console.log('hre artifacts:', await artifacts.getArtifactPaths());
     if (developmentChains.includes(network.name)) {
-        vrfCoordinatorV2Mock = await ethers.getContract("VRFCoordinatorV2Mock");
-        vrfCoordinatorV2Address = vrfCoordinatorV2Mock.address;
-        const txResp = await vrfCoordinatorV2Mock.createSubscription();
+        vrfCoordinatorV2_5Mock = await ethers.getContract("VRFCoordinatorV2_5Mock");
+        vrfCoordinatorV2_5Address = vrfCoordinatorV2_5Mock.address;
+        const txResp = await vrfCoordinatorV2_5Mock.createSubscription();
         const txRcpt = await txResp.wait(1);
         subscriptionId = txRcpt.events![0]!.args!.subId!.toString();
-        await vrfCoordinatorV2Mock.fundSubscription(subscriptionId.toString(), VRF_SUB_FUND_AMOUNT);
+        // console.log(subscriptionId);
+        await vrfCoordinatorV2_5Mock.fundSubscription(subscriptionId, VRF_SUB_FUND_AMOUNT);
     } else {
-        vrfCoordinatorV2Address = (networkConfig as {
+        vrfCoordinatorV2_5Address = (networkConfig as {
             [key: number]: {
-                vrfCoordinatorV2?: string,
-            }})[network.config.chainId!]["vrfCoordinatorV2"]!;
-        subscriptionId = "51115538415181763257872941889490908716294351060333594023821624322196006772795" // chainlink vrf v2.5, v2 is unavailable ?
+                vrfCoordinatorV2_5?: string,
+            }})[network.config.chainId!]["vrfCoordinatorV2_5"]!;
+        subscriptionId = "34604683759749477888056652172057628403454283637887467963489055799049183689105" // chainlink vrf v2.5, v2 is unavailable ?
     }
     entranceFee = (networkConfig as {
         [key: number]: {
@@ -49,15 +51,20 @@ module.exports = async ({ getNamedAccounts, deployments, network }: HardhatRunti
         [key: number]: {
             interval: string,
         }})[network.config.chainId!]["interval"]!;
+    nativePayment = (networkConfig as {
+        [key: number]: {
+            nativePayment: string,
+        }})[network.config.chainId!]["nativePayment"]!;
     const args = [
-        vrfCoordinatorV2Address,
+        vrfCoordinatorV2_5Address,
         entranceFee.toString(),
         gasLane,
         subscriptionId,
         callbackGasLimit,
-        interval
+        interval,
+        nativePayment
     ]
-    const raffle = await deploy("Raffle", {
+    const raffle = await deploy("RaffleV2_5", {
         from: deployer,
         args: args,
         waitConfirmations: 1,
@@ -69,10 +76,11 @@ module.exports = async ({ getNamedAccounts, deployments, network }: HardhatRunti
     }
     log("------------------------")
     if (developmentChains.includes(network.name)) {
-        await vrfCoordinatorV2Mock.addConsumer(subscriptionId, raffle.address);
+        // @ts-ignore
+        await vrfCoordinatorV2_5Mock.addConsumer(subscriptionId, raffle.address);
         log('Consumer is added');
     }
     log("------------------------")
 }
 
-module.exports.tags = ["all", "raffle"]
+module.exports.tags = ["all-2.5", "raffle-2.5"]
