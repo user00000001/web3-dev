@@ -145,4 +145,8 @@ contract RaffleV2_5 is VRFConsumerBaseV2Plus, KeeperCompatibleInterface {
     function getOwnEth() public view returns (uint256) {
         return address(this).balance;
     }
+
+    function getNativePayment() public view returns (bool) {
+        return s_nativePayment;
+    }
 }

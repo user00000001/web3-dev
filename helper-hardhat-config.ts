@@ -7,7 +7,7 @@ const networkConfig = {
         gasLane: "0x474e34a077df58807dbe9c96d3c009b23b3c6d0cce433e59bbf5b34f823bc56c",
         callbackGasLimit: "500000",
         interval: "30",
-        nativePayment: "0x1", // true
+        nativePayment: false,
     },
     11155111: {
         name: "sepolia",
@@ -17,7 +17,7 @@ const networkConfig = {
         gasLane: "0x474e34a077df58807dbe9c96d3c009b23b3c6d0cce433e59bbf5b34f823bc56c",
         callbackGasLimit: "500000",
         interval: "30",
-        nativePayment: "0x0", // false
+        nativePayment: true,
     }
 }
 

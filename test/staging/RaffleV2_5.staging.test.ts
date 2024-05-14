@@ -4,18 +4,18 @@ import { assert, expect } from "chai";
 import { BigNumber } from "ethers";
 import { network, deployments, ethers, getNamedAccounts } from "hardhat";
 
-import { Raffle } from "../../typechain-types";
+import { RaffleV2_5 } from "../../typechain-types";
 import { developmentChains, networkConfig } from "../../helper-hardhat-config";
 
 developmentChains.includes(network.name) ? describe.skip : describe("Raffle Unit Tests", function(){
-    let raffle: Raffle, 
+    let raffle: RaffleV2_5, 
     raffleEntranceFee: BigNumber,
     deployer: string;
     const chainId = network.config.chainId!;
     beforeEach(async function(){
         deployer = (await getNamedAccounts()).deployer;
         await deployments.fixture(["all"]);
-        raffle = await ethers.getContract("Raffle", deployer);
+        raffle = await ethers.getContract("RaffleV2_5", deployer);
         raffleEntranceFee = await raffle.getEntranceFee();
     });
     describe("fulfillRandomWords", function(){

@@ -51,7 +51,7 @@ module.exports = async ({ getNamedAccounts, deployments, network }: HardhatRunti
         }})[network.config.chainId!]["interval"]!;
     const args = [
         vrfCoordinatorV2Address,
-        entranceFee.toString(),
+        entranceFee,
         gasLane,
         subscriptionId,
         callbackGasLimit,

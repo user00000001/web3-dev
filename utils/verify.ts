@@ -6,7 +6,7 @@ import { run } from "hardhat";
 // const proxyAgent = new ProxyAgent("http://127.0.0.1:10809")
 // setGlobalDispatcher(proxyAgent)
 
-async function verify(contractAddr: string, args: string[]) {
+async function verify(contractAddr: string, args: any[]) {
     console.log("Verifying contract...")
     try {
         await run("verify:verify", {

@@ -18,7 +18,7 @@ module.exports = async ({ getNamedAccounts, deployments, network, artifacts }: H
     subscriptionId: string, 
     callbackGasLimit: string, 
     interval: string,
-    nativePayment: string;
+    nativePayment: boolean;
     // console.log('hre artifacts:', await artifacts.getArtifactPaths());
     if (developmentChains.includes(network.name)) {
         vrfCoordinatorV2_5Mock = await ethers.getContract("VRFCoordinatorV2_5Mock");
@@ -53,11 +53,11 @@ module.exports = async ({ getNamedAccounts, deployments, network, artifacts }: H
         }})[network.config.chainId!]["interval"]!;
     nativePayment = (networkConfig as {
         [key: number]: {
-            nativePayment: string,
+            nativePayment: boolean,
         }})[network.config.chainId!]["nativePayment"]!;
     const args = [
         vrfCoordinatorV2_5Address,
-        entranceFee.toString(),
+        entranceFee,
         gasLane,
         subscriptionId,
         callbackGasLimit,
