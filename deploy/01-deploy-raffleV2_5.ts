@@ -72,7 +72,8 @@ module.exports = async ({ getNamedAccounts, deployments, network, artifacts }: H
     });
     if (!developmentChains.includes(network.name) && process.env.ETHERSCAN_API_KEY) {
         log("Verifying...")
-        await verify(raffle.address, args)
+        // await verify("0x604bA251E2A3082118cd810FB0a225958a20c599", args);
+        await verify(raffle.address, args) // cmd: set http_proxy=http://127.0.0.1:10809 # using your proxy
     }
     log("------------------------")
     if (developmentChains.includes(network.name)) {

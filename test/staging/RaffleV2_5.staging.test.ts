@@ -14,8 +14,8 @@ developmentChains.includes(network.name) ? describe.skip : describe("Raffle Unit
     const chainId = network.config.chainId!;
     beforeEach(async function(){
         deployer = (await getNamedAccounts()).deployer;
-        await deployments.fixture(["all"]);
         raffle = await ethers.getContract("RaffleV2_5", deployer);
+        // raffle.attach("0xAc674F8a3d211f33D61cfCE138fA26ce611E53C2");
         raffleEntranceFee = await raffle.getEntranceFee();
     });
     describe("fulfillRandomWords", function(){

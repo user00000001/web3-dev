@@ -1,5 +1,6 @@
 import "@nomiclabs/hardhat-ethers";
 import "@nomiclabs/hardhat-waffle";
+import "@nomiclabs/hardhat-etherscan";
 import "@typechain/hardhat";
 import "hardhat-deploy";
 import "hardhat-gas-reporter";
@@ -24,7 +25,12 @@ const config: HardhatUserConfig = {
     },
     sepolia: {
       url: process.env.SEPOLIA_RPC_URL,
-      accounts: [process.env.PRIVATE_KEY!],
+      accounts: [
+        process.env.PRIVATE_KEY!,
+        process.env.PRIVATE_KEY1!,
+        process.env.PRIVATE_KEY2!,
+        process.env.PRIVATE_KEY3!
+      ],
       chainId: 11155111,
     },
     localhost: {
@@ -38,11 +44,12 @@ const config: HardhatUserConfig = {
       default: 0,
     },
     user: {
-      default: 0,
+      default: 1,
     },
   },
   etherscan: {
     apiKey: process.env.ETHERSCAN_API_KEY,
+    customChains: [] // in case of TypeError: customChains is not iterable
   },
   gasReporter: {
     enabled: true,
