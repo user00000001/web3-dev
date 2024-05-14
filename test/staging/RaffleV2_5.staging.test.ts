@@ -27,6 +27,8 @@ developmentChains.includes(network.name) ? describe.skip : describe("Raffle Unit
             const startingTimeStamp = await raffle.getLatestTimeStamp();
     
             await new Promise(async(resolve, reject)=>{
+                await (await raffle.enterRaffle({value: raffleEntranceFee})).wait(1);
+                const winnerStartingBalance = await accounts[0].getBalance();
                 raffle.once("WinnerPicked", async ()=>{
                     console.log("Found the event!");
                     try {
@@ -45,13 +47,11 @@ developmentChains.includes(network.name) ? describe.skip : describe("Raffle Unit
                             winnerEndingBalance.toString(),
                             winnerStartingBalance.add(raffleEntranceFee).toString()
                         )
+                        resolve(1);
                     } catch (error) {
                         reject(error);
                     }
-                    resolve(1);
                 })
-                await raffle.enterRaffle({value: raffleEntranceFee});
-                const winnerStartingBalance = await accounts[0].getBalance();
             })
     })
     });
