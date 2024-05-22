@@ -23,6 +23,6 @@ task("request-data", "Calls an API Consumer Contract to request external data")
         console.log(
             `Contract ${contractAddr} external data request successfully called. Transaction Hash: ${tx.hash}\n`,
             `Run the following to read the returned result:\n`,
-            `yarn hardhat read-data --contract ${contractAddr} --network ${hre.network.name}`
+            `pnpm hardhat read-data --contract ${contractAddr} --network ${hre.network.name}`
         )
     })

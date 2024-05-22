@@ -26,6 +26,7 @@ task("read-random-number", "Reads the random number returned to a contract by Ch
                 `Random Numbers are: ${firstRandomNumber.toString()} and ${secondRandomNumber.toString()}`
             )
         } catch (error) {
+            console.error(error)
             if (["hardhat", "localhost", "ganache"].includes(hre.network.name)) {
                 console.log(
                     "You'll have to manually update the value since you're on a local chain!"

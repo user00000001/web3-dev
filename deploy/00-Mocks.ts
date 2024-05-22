@@ -1,7 +1,7 @@
 import { HardhatRuntimeEnvironment } from "hardhat/types";
 import { getNamedAccounts, deployments, network } from "hardhat";
 
-export default async () => {
+const dply = async () => {
     const DECIMALS: string = `18`;
     const INITIAL_PRICE: string = `200000000000000000000`;
 
@@ -41,4 +41,5 @@ export default async () => {
     }
 }
 
-export const tags = ["all", "mocks", `main`]
+export default dply;
+dply.tags = ["all", "mocks", `main`]

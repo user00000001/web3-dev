@@ -37,4 +37,4 @@ const deployFunction: DeployFunction = async function ({getNamedAccounts, deploy
     log(`----------------------------------------`)
 }
 export default deployFunction;
-export const tags = ["all", "feed", "main"];
+deployFunction.tags = ["all", "feed", "main"];

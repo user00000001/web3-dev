@@ -19,12 +19,13 @@ const deployFunction: DeployFunction = async ({ getNamedAccounts, deployments })
     let linkTokenAddress: string | undefined
     let vrfCoordinatorAddress: string | undefined
     let subscriptionId: BigNumber
+    let VRFCoordinatorV2_5Mock: VRFCoordinatorV2_5Mock | undefined
 
     if (chainId === 31337) {
         const linkToken = await get("MockLinkToken")
-        const VRFCoordinatorV2_5Mock: VRFCoordinatorV2_5Mock = await ethers.getContract(
+        VRFCoordinatorV2_5Mock = (await ethers.getContract(
             "VRFCoordinatorV2_5Mock"
-        )
+        )) as VRFCoordinatorV2_5Mock
 
         vrfCoordinatorAddress = VRFCoordinatorV2_5Mock.address
         linkTokenAddress = linkToken.address
@@ -58,6 +59,8 @@ const deployFunction: DeployFunction = async ({ getNamedAccounts, deployments })
     if (!developmentChains.includes(network.name) && process.env.ETHERSCAN_API_KEY) {
         log("Verifying...")
         await verify(randomNumberConsumerV2Plus.address, args)
+    } else {
+        await VRFCoordinatorV2_5Mock?.addConsumer(subscriptionId, randomNumberConsumerV2Plus.address);
     }
 
     log("Run RandomNumberConsumerV2Plus contract with the following command")
