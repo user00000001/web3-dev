@@ -1,13 +1,22 @@
 import * as dotenv from "dotenv";
+dotenv.config();
 
 import { HardhatUserConfig, task } from "hardhat/config";
+import "@nomicfoundation/hardhat-toolbox";
+import "@nomicfoundation/hardhat-chai-matchers"
+import "@nomiclabs/hardhat-ethers";
 import "@nomiclabs/hardhat-etherscan";
-import "@nomiclabs/hardhat-waffle";
 import "@typechain/hardhat";
 import "hardhat-gas-reporter";
 import "solidity-coverage";
+import "hardhat-deploy";
+import "hardhat-contract-sizer"
+import "@appliedblockchain/chainlink-plugins-fund-link"
 
-dotenv.config();
+import "./tasks"; // after typechain generated.
+import "./tasks/accounts";
+import "./tasks/balance";
+import "./tasks/block-number";
 
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
@@ -55,10 +64,17 @@ const config: HardhatUserConfig = {
     ],
   },
   networks: {
-    ropsten: {
-      url: process.env.ROPSTEN_URL || "",
+    hardhat: {
+      chainId: 31337,
+    },
+    localhost: {
+      chainId: 31337
+    },
+    sepolia: {
+      url: process.env.SEPOLIA_URL || "",
       accounts:
         process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      chainId: 11155111,
     },
   },
   gasReporter: {
@@ -67,7 +83,16 @@ const config: HardhatUserConfig = {
   },
   etherscan: {
     apiKey: process.env.ETHERSCAN_API_KEY,
+    customChains: []
   },
+  namedAccounts: {
+    deployer: {
+      default: 0
+    },
+    user: {
+      default: 1
+    }
+  }
 };
 
 export default config;

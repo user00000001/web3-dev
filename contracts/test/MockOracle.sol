@@ -9,7 +9,7 @@ import { LinkTokenInterface } from "@chainlink/contracts/src/v0.8/shared/interfa
  * @title The Chainlink Mock Oracle contract
  * @notice Chainlink smart contract developers can use this to test their contracts
 */
-abstract contract MockOracle is ChainlinkRequestInterface, LinkTokenInterface, LinkTokenReceiver {
+contract MockOracle is ChainlinkRequestInterface, LinkTokenReceiver {
     uint256 public constant EXPIRY_TIME = 5 minutes;
     uint256 private constant MINIMUM_CONSUMER_GAS_LIMIT = 4e5;
     
