@@ -21,7 +21,7 @@ task("read-data", "Calls an API Consumer Contract to read data obtained from an 
         const apiConsumerContract: APIConsumer = APIConsumer__factory.connect(contractAddr, signer)
 
         const result: BigNumber = await apiConsumerContract.volume()
-        console.log(`Data is: ${result}`)
+        console.log(`Data is: ${result.toHexString()}`)
 
         if (
             result == constants.Zero &&
