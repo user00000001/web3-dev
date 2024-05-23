@@ -19,6 +19,7 @@ type NetworkConfigMap = {
     [chainId: string]: NetworkConfigItem,
 }
 
+export const INITIAL_SUPPLY = "1000000000000000000000000"
 export const VERIFICATION_BLOCK_CONFIRMATIONS = 6
 export const developmentChains = ["localhost", "hardhat"]
 export const networkConfig: NetworkConfigMap = {

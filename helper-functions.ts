@@ -34,10 +34,14 @@ export const autoFundCheck = async (
 
 }
 
-export const verify = async (contractAddress: string, args: any[]) => {
+export const verify = async (contractAddress: string, args: any[], contract: string="") => {
     console.log("Verifying contract...");
     try {
-        await run("verify:verify", {
+        await run("verify:verify", contract ? {
+            address: contractAddress,
+            constructorArguments: args,
+            contract,
+        } : {
             address: contractAddress,
             constructorArguments: args,
         })
