@@ -37,7 +37,7 @@ const deployFunction: DeployFunction = async ({ getNamedAccounts, deployments })
         subscriptionId = ethers.BigNumber.from(transactionReceipt.events[0].topics[1])
         await VRFCoordinatorV2_5Mock.fundSubscription(subscriptionId, fundAmount)
     } else {
-        subscriptionId = BigNumber.from(process.env.VRF_SUBSCRIPTION_ID)
+        subscriptionId = BigNumber.from(process.env.VRF_SUBSCRIPTION_ID || "34604683759749477888056652172057628403454283637887467963489055799049183689105")
         linkTokenAddress = networkConfig[chainId].linkToken
         vrfCoordinatorAddress = networkConfig[chainId].vrfCoordinator
     }

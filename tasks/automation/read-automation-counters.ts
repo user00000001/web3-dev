@@ -31,4 +31,10 @@ task(
         const counter: BigNumber = await automationCounterContract.counter()
 
         console.log(`Counter is: ${counter.toString()}`)
+        const checkData = hre.ethers.utils.keccak256(hre.ethers.utils.toUtf8Bytes("1111111111111111111111"))
+        const interval: BigNumber = await automationCounterContract.interval()
+        await hre.network.provider.send("evm_increaseTime", [interval.toNumber() + 1])
+        await hre.network.provider.send("evm_mine")
+        await automationCounterContract.performUpkeep(checkData)
+        console.log(`performUpkeep once, counter increased one.`)
     })

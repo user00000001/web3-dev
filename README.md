@@ -9,7 +9,16 @@ pnpm i -D hardhat@~2.9.0 @nomiclabs/hardhat-ethers@npm:hardhat-deploy-ethers@0.3
 
 # pnpm i -D "git+https://github.com/smartcontractkit/chainlink.git#49f1bf3ba296f0e3dfc01d5a3d371f82f159dc4a&path:contracts"
 pnpm i -D "@chainlink/contracts@github:smartcontractkit/chainlink#49f1bf3ba296f0e3dfc01d5a3d371f82f159dc4a&path:contracts"
-pnpm add -D @openzeppelin/contracts@^4 @appliedblockchain/chainlink-plugins-fund-link 
+
+# fix fund-link not support ethereum sepolia
+pnpm i -D "@appliedblockchain/chainlink-plugins-fund-link@github:user00000001/chainlink-consumer#4baee5fe304db9352c99b0d6437a305ab3c89ff3&path:plugins/fund-link" # need build dist.
+#build then link to @appliedblockchain/chainlink-plugins-fund-link
+git clone --depth 1 https://github.com/user00000001/chainlink-consumer && cd plugins/fund-link && \
+pnpm remove @appliedblockchain@chainlink-eslint-config tsc && pnpm install && pnpm update -D ts-node@latest typescript@latest && \
+pnpm run build && pnpm link -g && cd $prjpath && pnpm link -g @appliedblockchain/chainlink-plugins-fund-link
+pnpm hardhat fund-link --contract $contractaddress --network sepolia --linkaddress $linkaddress
+
+pnpm add -D @openzeppelin/contracts@^4 
 ```
 
 ## test at localhost
