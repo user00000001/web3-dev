@@ -52,7 +52,7 @@ export const networkConfig: NetworkConfigMap = {
         name: "sepolia",
         linkToken: "0x779877A7B0D9E8603169DdbD7836e478b4624789",
         ethUsdPriceFeed: "0x694AA1769357215DE4FAC081bf1f309aDC325306",
-        keyHash: "0x787d74caea10b2b357790d5b5247c2f63d1d91572a9846f780606e4d953677ae",
+        keyHash: "0x787d74caea10b2b357790d5b5247c2f63d1d91572a9846f780606e4d953677ae", // https://docs.chain.link/vrf/v2-5/supported-networks keyhash 30gwei was changed to 750gwei(0x474e34a077df58807dbe9c96d3c009b23b3c6d0cce433e59bbf5b34f823bc56c) which takes too much LINKs, vrf pending then failed, not trying.
         vrfCoordinator: "0x9DdfaCa8183c41ad55329BdeeD9F6A8d53168B1B",
         oracle: "0x6090149792dAAeE9D1D568c9f9a6F6B46AA29eFD",
         jobId: "ca98366cc7314957b8c012c72f05aeeb",

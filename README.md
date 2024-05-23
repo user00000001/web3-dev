@@ -14,7 +14,8 @@ pnpm i -D "@chainlink/contracts@github:smartcontractkit/chainlink#49f1bf3ba296f0
 pnpm i -D "@appliedblockchain/chainlink-plugins-fund-link@github:user00000001/chainlink-consumer#4baee5fe304db9352c99b0d6437a305ab3c89ff3&path:plugins/fund-link" # need build dist.
 #build then link to @appliedblockchain/chainlink-plugins-fund-link
 git clone --depth 1 https://github.com/user00000001/chainlink-consumer && cd plugins/fund-link && \
-pnpm remove @appliedblockchain@chainlink-eslint-config tsc && pnpm install && pnpm update -D ts-node@latest typescript@latest && \
+pnpm remove @appliedblockchain@chainlink-eslint-config tsc && pnpm install && pnpm i -D ts-node@latest \
+typescript@latest @nomiclabs/hardhat-ethers@npm:hardhat-deploy-ethers@0.3.0-beta.13 && \
 pnpm run build && pnpm link -g && cd $prjpath && pnpm link -g @appliedblockchain/chainlink-plugins-fund-link
 pnpm hardhat fund-link --contract $contractaddress --network sepolia --linkaddress $linkaddress
 
