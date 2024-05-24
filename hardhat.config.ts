@@ -61,11 +61,18 @@ const config: HardhatUserConfig = {
           version: "0.8.0",
           settings: COMPILER_SETTINGS,
       },
+      {
+          version: "0.6.12",
+          settings: COMPILER_SETTINGS,
+      },
     ],
   },
   networks: {
     hardhat: {
       chainId: 31337,
+      forking: {
+        url: process.env.MAINNET_URL!,
+      }
     },
     localhost: {
       chainId: 31337

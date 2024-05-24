@@ -19,7 +19,7 @@ typescript@latest @nomiclabs/hardhat-ethers@npm:hardhat-deploy-ethers@0.3.0-beta
 pnpm run build && pnpm link -g && cd $prjpath && pnpm link -g @appliedblockchain/chainlink-plugins-fund-link
 pnpm hardhat fund-link --contract $contractaddress --network sepolia --linkaddress $linkaddress
 
-pnpm add -D @openzeppelin/contracts@^4 
+pnpm add -D @openzeppelin/contracts@^4 @aave/protocol-v2
 ```
 
 ## test at localhost

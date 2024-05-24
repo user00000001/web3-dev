@@ -14,6 +14,7 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@aave/protocol-v2": "^1.0.1",
     "@appliedblockchain/chainlink-contracts": "0.0.4",
     "@babel/eslint-parser": "^7.24.5",
     "@chainlink/contracts": "github:smartcontractkit/chainlink#49f1bf3ba296f0e3dfc01d5a3d371f82f159dc4a&path:contracts",
