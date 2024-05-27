@@ -34,4 +34,4 @@ const deployFunction: DeployFunction = async ({
 };
 
 export default deployFunction;
-deployFunction.tags = ["basicnft"];
+deployFunction.tags = ["all", "basicnft", "main"];

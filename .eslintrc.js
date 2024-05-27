@@ -23,9 +23,10 @@ module.exports = {
     "node/no-unpublished-import": [
       "error",
       {
-        allowModules: ["hardhat", "hardhat-deploy"],
+        allowModules: ["hardhat", "hardhat-deploy", "@pinata/sdk"],
       },
     ],
     "node/no-missing-import": "off",
+    camelcase: "off",
   },
 };

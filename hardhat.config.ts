@@ -41,6 +41,10 @@ const config: HardhatUserConfig = {
         version: "0.8.4",
         settings: COMPILER_SETTINGS,
       },
+      {
+        version: "0.8.19",
+        settings: COMPILER_SETTINGS,
+      },
     ],
   },
   networks: {

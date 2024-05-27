@@ -10,6 +10,6 @@
       // "@/*": ["./*"]
     }
   },
-  "include": ["./scripts", "./test", "./typechain", "./typechain-types", "./deploy", "./tasks"],
+  "include": ["./scripts", "./test", "./typechain", "./typechain-types", "./deploy", "./tasks", "./utils"],
   "files": ["./hardhat.config.ts", "./helper-hardhat-config.ts"]
 }

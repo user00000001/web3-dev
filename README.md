@@ -34,7 +34,9 @@ pnpm install --save-dev "hardhat@~2.9.9" "@nomiclabs/hardhat-waffle@^2.0.0" "eth
 
 pnpm i -D "@nomiclabs/hardhat-ethers@npm:hardhat-deploy-ethers@0.3.0-beta.13" "hardhat-deploy@^0.10.5"
 
-pnpm i -D "@openzeppelin/contracts@^4"
+pnpm i -D "@openzeppelin/contracts@^4" @pinata/sdk
+pnpm i -D "@chainlink/contracts@github:smartcontractkit/chainlink#49f1bf3ba296f0e3dfc01d5a3d371f82f159dc4a&path:contracts"
+
 ```
 
 ## basic operations
@@ -45,4 +47,6 @@ pnpm hardhat typechain
 pnpm hardhat test
 pnpm hardhat coverage
 pnpm hardhat accounts
+
+pnpm hardhat deploy --tags randomipfs --reset --network sepolia
 ```
