@@ -20,7 +20,7 @@ import { BasicNft } from "../../typechain";
         )) as unknown as BasicNft;
       });
       it("Allows users to mint an NFT, and updates appropriately", async function () {
-        const txResp = await basicNft.mintNtf();
+        const txResp = await basicNft.mintNft();
         await txResp.wait(1);
         const tokenURI = await basicNft.tokenURI(0);
         const tokenCounter = await basicNft.getTokenCounter();

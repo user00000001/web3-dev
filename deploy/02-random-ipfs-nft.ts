@@ -39,7 +39,10 @@ const deployFunction: DeployFunction = async ({
   const { deployer } = await getNamedAccounts();
   const chainId = network.config.chainId!;
 
-  if (process.env.UPLOAD_TO_PINATA === "true") {
+  if (
+    process.env.UPLOAD_TO_PINATA === "true" &&
+    !developmentChains.includes(network.name)
+  ) {
     tokenUris = await handleTokenUris();
   }
 
