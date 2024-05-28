@@ -17,6 +17,9 @@ pnpm install --save-dev "hardhat@~2.9.9" "@nomiclabs/hardhat-waffle@^2.0.0" "eth
  "ts-node@^10.1.0" "typechain@^5.1.2" "typescript@^4.5.2"
 pnpm i -D "@nomiclabs/hardhat-ethers@npm:hardhat-deploy-ethers@0.3.0-beta.13" "hardhat-deploy@^0.10.5"
 
-pnpm i -D "@openzeppelin/contracts@^4" @pinata/sdk base64-sol
+pnpm i -D "@openzeppelin/contracts@^4"
 pnpm i -D "@chainlink/contracts@github:smartcontractkit/chainlink#49f1bf3ba296f0e3dfc01d5a3d371f82f159dc4a&path:contracts"
+
+pnpm hardhat node --hostname 0.0.0.0 --no-deploy
+
 ```
