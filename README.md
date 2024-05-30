@@ -20,3 +20,15 @@ pnpm install --save-dev "hardhat@~2.9.9" "@nomiclabs/hardhat-waffle@^2.0.0" "eth
 pnpm hardhat node --hostname 0.0.0.0 --no-deploy
 
 ```
+
+## upgrade by hardhat-upgrades
+
+```shell
+pnpm hardhat run scripts/otherUpgradeExamples/deploy.ts --network localhost # then set env PROXY_OF_BOX
+pnpm hardhat run scripts/otherUpgradeExamples/prepare-upgrade.ts --network localhost
+pnpm hardhat run scripts/otherUpgradeExamples/upgrade.ts --network localhost
+
+# set env NEXT_PROXY_ADMIN
+# It seems not transfer again at this version. (always using hre default signer, can't specify signer)
+pnpm hardhat run scripts/otherUpgradeExamples/transfer-ownership.ts --network localhost
+```
