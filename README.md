@@ -32,3 +32,14 @@ pnpm hardhat run scripts/otherUpgradeExamples/upgrade.ts --network localhost
 # It seems not transfer again at this version. (always using hre default signer, can't specify signer)
 pnpm hardhat run scripts/otherUpgradeExamples/transfer-ownership.ts --network localhost
 ```
+
+## Governance
+
+```shell
+pnpm hardhat deploy --tags all --network localhost
+echo -n '{"31337":[],"1":[],"11155111":[]}' > proposals.json
+
+pnpm hardhat run --network localhost scripts/propose.ts
+pnpm hardhat run --network localhost scripts/votes.ts
+pnpm hardhat run --network localhost scripts/queue-and-executes.ts
+```

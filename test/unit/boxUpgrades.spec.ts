@@ -16,7 +16,7 @@ import {
         proxyBox: Box,
         boxProxyAdmin: BoxProxyAdmin;
       beforeEach(async () => {
-        await deployments.fixture(["all"]);
+        await deployments.fixture(["boxes"]);
         box = await ethers.getContract("Box"); // this Box is Proxy of Box with correct storage, and using Box's abi
         box_impl = await ethers.getContract("Box_Implementation"); // this is Box contract's instance with individual storage
         transparentProxy = await ethers.getContract("Box_Proxy"); // Proxy of Box with correct storage, but without Box's abi

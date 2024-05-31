@@ -22,6 +22,7 @@ module.exports = async ({
   log("----------------------------------------------------");
 
   const box = await deploy("Box", {
+    contract: "contracts/Box.sol:Box",
     from: deployer,
     args: [],
     log: true,
@@ -56,7 +57,7 @@ module.exports = async ({
     const boxAddress = (await ethers.getContract("Box_Implementation")).address;
     const boxProxyAdmin = (await ethers.getContract("BoxProxyAdmin")).address;
     const boxProxy = (await ethers.getContract("Box_Proxy")).address; // this is the same address of deploy("Box")
-    await verify(boxAddress, []);
+    await verify(boxAddress, [], "contracts/Box.sol:Box");
     await verify(boxProxy, []);
     await verify(boxProxyAdmin, [deployer], "contracts/Box.sol:BoxProxyAdmin");
     await verify(box2.address, [], "contracts/Box.sol:BoxV2");
@@ -64,4 +65,4 @@ module.exports = async ({
   log("----------------------------------------------------");
 };
 
-module.exports.tags = ["all", "box"];
+module.exports.tags = ["boxes"];
