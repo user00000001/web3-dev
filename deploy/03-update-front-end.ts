@@ -13,6 +13,8 @@ import { HardhatRuntimeEnvironment } from "hardhat/types";
 const updateFrontEnd: DeployFunction = async function (
   hre: HardhatRuntimeEnvironment
 ) {
+  // fs.mkdirSync(frontEndAbiLocation, { recursive: true });
+  fs.mkdirSync(frontEndAbiLocation2, { recursive: true });
   if (process.env.UPDATE_FRONT_END) {
     console.log("Writing to front end...");
     await updateContractAddresses();
@@ -23,20 +25,20 @@ const updateFrontEnd: DeployFunction = async function (
 
 async function updateAbi() {
   const nftMarketplace = await ethers.getContract("NftMarketplace");
-  fs.writeFileSync(
-    `${frontEndAbiLocation}NftMarketplace.json`,
-    nftMarketplace.interface.format(ethers.utils.FormatTypes.json).toString()
-  );
+  // fs.writeFileSync(
+  //   `${frontEndAbiLocation}NftMarketplace.json`,
+  //   nftMarketplace.interface.format(ethers.utils.FormatTypes.json).toString()
+  // );
   fs.writeFileSync(
     `${frontEndAbiLocation2}NftMarketplace.json`,
     nftMarketplace.interface.format(ethers.utils.FormatTypes.json).toString()
   );
 
   const basicNft = await ethers.getContract("BasicNft");
-  fs.writeFileSync(
-    `${frontEndAbiLocation}BasicNft.json`,
-    basicNft.interface.format(ethers.utils.FormatTypes.json).toString()
-  );
+  // fs.writeFileSync(
+  //   `${frontEndAbiLocation}BasicNft.json`,
+  //   basicNft.interface.format(ethers.utils.FormatTypes.json).toString()
+  // );
   fs.writeFileSync(
     `${frontEndAbiLocation2}BasicNft.json`,
     basicNft.interface.format(ethers.utils.FormatTypes.json).toString()
@@ -46,8 +48,11 @@ async function updateAbi() {
 async function updateContractAddresses() {
   const chainId = network.config.chainId!.toString();
   const nftMarketplace = await ethers.getContract("NftMarketplace");
+  if (!fs.existsSync(frontEndContractsFile2)) {
+    fs.writeFileSync(frontEndContractsFile2, "{}");
+  }
   const contractAddresses = JSON.parse(
-    fs.readFileSync(frontEndContractsFile, "utf8")
+    fs.readFileSync(frontEndContractsFile2, { encoding: "utf8" })
   );
   if (chainId in contractAddresses) {
     if (
@@ -60,7 +65,7 @@ async function updateContractAddresses() {
   } else {
     contractAddresses[chainId] = { NftMarketplace: [nftMarketplace.address] };
   }
-  fs.writeFileSync(frontEndContractsFile, JSON.stringify(contractAddresses));
+  // fs.writeFileSync(frontEndContractsFile, JSON.stringify(contractAddresses));
   fs.writeFileSync(frontEndContractsFile2, JSON.stringify(contractAddresses));
 }
 export default updateFrontEnd;

@@ -7,8 +7,10 @@ import NetworkBanner from "../components/NetworkBanner";
 import { NotificationProvider } from "web3uikit";
 import Header from "../components/Header";
 
-const APP_ID = process.env.NEXT_PUBLIC_APP_ID;
-const SERVER_URL = process.env.NEXT_PUBLIC_MORALIS_SERVER_URL;
+const client = new ApolloClient({
+  cache: new InMemoryCache(),
+  uri: "https://api.studio.thegraph.com/query/77019/ethereumsepolia/version/latest",
+});
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -17,16 +19,14 @@ function MyApp({ Component, pageProps }: AppProps) {
         <title>NFT Marketplace</title>
         <link rel="shortcut icon" href="/favicon.ico" />
       </Head>
-      <MoralisProvider
-        appId={APP_ID!}
-        serverUrl={SERVER_URL!}
-        initializeOnMount={true}
-      >
-        <NotificationProvider>
-          <NetworkBanner />
-          <Header />
-          <Component {...pageProps} />
-        </NotificationProvider>
+      <MoralisProvider initializeOnMount={false}>
+        <ApolloProvider client={client}>
+          <NotificationProvider>
+            <NetworkBanner />
+            <Header />
+            <Component {...pageProps} />
+          </NotificationProvider>
+        </ApolloProvider>
       </MoralisProvider>
     </>
   );
