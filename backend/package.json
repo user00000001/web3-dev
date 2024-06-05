@@ -4,7 +4,7 @@
 	"private": true,
 	"scripts": {
 		"build": "npx hardhat compile",
-		"deploy-testnet": "npx hardhat run ./scripts/MyContract_deploy.js --network ETH_GOERLI",
+		"deploy-testnet": "npx hardhat run ./scripts/MyContract_deploy.js --network ETH_SEPOLIA",
 		"deploy": "npx hardhat run ./scripts/MyContract_deploy.js --network ETH_MAINNET",
 		"node": "npx hardhat node",
 		"deploy-local": "npx hardhat run ./scripts/MyContract_deploy.js --network localhost"
