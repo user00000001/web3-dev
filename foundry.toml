@@ -1,6 +1,30 @@
+
+
 [profile.default]
 src = "src"
 out = "out"
 libs = ["lib"]
+auto_detect_remappings = false
+chain_id = 1
+auto_detect_solc = true
+solc_version = "0.8.19"
+optimizer = false
+optimizer_runs = 200
+libraries = []
+unchecked_cheatcode_artifacts = true
+
+[profile.0_4_x]
+src = "src-0_4_x"
+test = "test-0_4_x"
+out = "out"
+libs = ["lib"]
+auto_detect_remappings = false
+chain_id = 1
+auto_detect_solc = true
+solc_version = "0.4.19"
+optimizer = false
+optimizer_runs = 200
+libraries = []
+unchecked_cheatcode_artifacts = true
 
 # See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options

@@ -18,7 +18,7 @@ https://book.getfoundry.sh/
 ### Build
 
 ```shell
-$ forge build
+$ FOUNDRY_PROFILE=0_4_x forge build
 ```
 
 ### Test
