@@ -13,5 +13,7 @@ pnpm hardhat ignition deploy ./ignition/modules/Lock.ts
 
 pnpm install --save-dev @nomicfoundation/hardhat-foundry
 pnpm hardhat init-foundry
-forge test -vvvvv
+forge test -vv # console.log
+forge test -vvvvv # all details
+forge test --match-contract Lock --no-match-test owner
 ```
