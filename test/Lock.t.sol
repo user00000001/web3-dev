@@ -5,27 +5,34 @@ import "forge-std/Test.sol";
 import "forge-std/console.sol";
 import {Lock} from "../contracts/Lock.sol";
 
-contract LockTest is Test {
+contract LockTestBase is Test {
     Lock public lock;
     uint256 public unlockTime = block.timestamp + 1 days;
     uint256 public constant lock_initial_value = 1e9 wei;
+
     receive() external payable {}
+
     function setUp() public {
         lock = new Lock{value: lock_initial_value}(unlockTime);
     }
+}
 
-    function test_constructor_unlockTime() view public {
+contract LockConstructorTest is LockTestBase {
+    function test_constructor_unlockTime() public view {
         assertEq(lock.unlockTime(), unlockTime, "unlockTime not matched.");
         console.log("unlockTime Compare: %s %s(t)", lock.unlockTime(), unlockTime);
     }
-    function test_constructor_owner() view public {
+
+    function test_constructor_owner() public view {
         assertEq(lock.owner(), address(this), "owner not matched.");
         console.log("owner Compare: %s %s(t)", lock.owner(), address(this));
     }
-    function test_constructor_balance() view public {
+
+    function test_constructor_balance() public view {
         assertEq(address(lock).balance, lock_initial_value, "balance not matched.");
         console.log("balance Compare: %s %s(t)", address(lock).balance, lock_initial_value);
     }
+
     function test_constructor_unlockTime_failure() public {
         console.log("%s", block.timestamp); // 1s
         // skip(29); // this costs 29 seconds
@@ -35,10 +42,14 @@ contract LockTest is Test {
         vm.expectRevert("Unlock time should be in the future");
         new Lock{value: 1}(passTime);
     }
+}
+
+contract LockWithdrawTest is LockTestBase {
     function test_withdraw_validation_unlockTime() public {
         vm.expectRevert("You can't withdraw yet");
         lock.withdraw();
     }
+
     function test_withdraw_validation_new_owner() public {
         skip(unlockTime); // reach the unlockTime point.
         address new_user = makeAddr("new_user");
@@ -46,6 +57,7 @@ contract LockTest is Test {
         vm.expectRevert("You aren't the owner");
         lock.withdraw();
     }
+
     function test_withdraw_validation_owner() public {
         skip(unlockTime);
         vm.expectCall(
@@ -58,6 +70,9 @@ contract LockTest is Test {
         );
         lock.withdraw();
     }
+}
+
+contract LockEventTest is LockTestBase {
     function test_event() public {
         // skip(unlockTime);
         vm.warp(unlockTime);
