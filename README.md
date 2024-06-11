@@ -31,4 +31,6 @@ cast call --rpc-url=http://localhost:8545 --private-key=0xac0974bec39a17e36ba4a6
 
 # forge script --chain sepolia script/NFT.s.sol:MyScript --rpc-url $SEPOLIA_RPC_URL --broadcast --verify -vvvv
 forge script --chain anvil-hardhat script/NFT.s.sol:MyScript --fork-url http://localhost:8545 --broadcast -vvvv
+
+forge test --match-path test/Create2.t.sol -vvvv
 ```
