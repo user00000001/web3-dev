@@ -77,8 +77,12 @@ contract LockEventTest is LockTestBase {
         // skip(unlockTime);
         vm.warp(unlockTime);
         // vm.expectEmit();
-        vm.expectEmit(address(lock));
+        // vm.expectEmit(address(lock));
+        // vm.expectEmit(false, false, false, true);
+        vm.expectEmit(false, false, false, true, address(lock));
         emit Lock.Withdrawal(lock_initial_value, block.timestamp);
+        // vm.expectEmit(true, true, true, false, address(lock)); // PASS, not check the data. Others have not indexed, so there is no topic 1-3.
+        // emit Lock.Withdrawal(lock_initial_value+100, block.timestamp);
         lock.withdraw();
     }
 }
