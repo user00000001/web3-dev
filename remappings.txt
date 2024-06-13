@@ -1,3 +1,4 @@
 forge-std/=lib/forge-std/src/
 Contract.sol/=src/Contract.sol/
-@chainlink/=lib/foundry-chainlink-toolkit/lib/chainlink-brownie-contracts/
+@chainlink/=lib/@chainlink/
+@openzeppelin/=lib/foundry-chainlink-toolkit/lib/openzeppelin-contracts

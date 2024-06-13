@@ -15,15 +15,16 @@ https://book.getfoundry.sh/
 
 ## Usage
 
-### Build
+### install git repos as libs
+
+```shell
+forge install --no-commit @chainlink=smartcontractkit/chainlink@49f1bf3ba296f0e3dfc01d5a3d371f82f159dc4a
+```
+
+### Build & Test
 
 ```shell
 $ FOUNDRY_PROFILE=0_4_x forge build
-```
-
-### Test
-
-```shell
 $ forge test
 ```
 
