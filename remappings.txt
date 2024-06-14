@@ -2,3 +2,4 @@ forge-std/=lib/forge-std/src/
 Contract.sol/=src/Contract.sol/
 @chainlink/=lib/@chainlink/
 @openzeppelin/=lib/foundry-chainlink-toolkit/lib/openzeppelin-contracts
+@aave/protocol-v2=lib/@aave/protocol-v2

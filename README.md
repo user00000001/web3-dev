@@ -19,6 +19,7 @@ https://book.getfoundry.sh/
 
 ```shell
 forge install --no-commit @chainlink=smartcontractkit/chainlink@49f1bf3ba296f0e3dfc01d5a3d371f82f159dc4a
+forge install --no-commit @aave/protocol-v2=aave/protocol-v2
 ```
 
 ### Build & Test
@@ -49,7 +50,7 @@ $ anvil
 ### Deploy
 
 ```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
+$ forge script script/readPrice.s.sol:readPriceScript --fork-url http://127.0.0.1:8545 --broadcast --private-key 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80
 ```
 
 ### Cast
