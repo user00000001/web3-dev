@@ -1,7 +1,7 @@
-import { ConnectButton } from '@rainbow-me/rainbowkit';
-import type { NextPage } from 'next';
-import Head from 'next/head';
-import styles from '../styles/Home.module.css';
+import { ConnectButton } from "@rainbow-me/rainbowkit";
+import type { NextPage } from "next";
+import Head from "next/head";
+import styles from "../styles/Home.module.css";
 
 const Home: NextPage = () => {
   return (
@@ -19,12 +19,12 @@ const Home: NextPage = () => {
         <ConnectButton />
 
         <h1 className={styles.title}>
-          Welcome to <a href="">RainbowKit</a> + <a href="">wagmi</a> +{' '}
+          Welcome to <a href="">RainbowKit</a> + <a href="">wagmi</a> +{" "}
           <a href="https://nextjs.org">Next.js!</a>
         </h1>
 
         <p className={styles.description}>
-          Get started by editing{' '}
+          Get started by editing{" "}
           <code className={styles.code}>pages/index.tsx</code>
         </p>
 
@@ -71,6 +71,20 @@ const Home: NextPage = () => {
           </a>
         </div>
       </main>
+
+      <div className="flex h-[360px] bg-emerald-700 flex-wrap justify-center items-center rounded-3xl">
+        {Array.from(Array(5).keys()).map((i) => {
+          let t_html = `${i}`.padStart(2, "0").repeat(10)+`<p style="font-size: 30px">&#${127872+i};</p>`;
+          return <div key={i} className=" m-4 p-6 w-1/5 hover:outline-4 hover:outline-offset-8 hover:outline-green-900 hover:border-red-800 hover:outline-dashed hover:border-4 hover:ring-4 hover:ring-yellow-500 bg-slate-600 border-red-800 text-red-500 text-center rounded-2xl" dangerouslySetInnerHTML={{__html: t_html}}/>;
+        })}
+      </div>
+
+      <div className="grid grid-flow-row grid-cols-4 h-[1000px] bg-emerald-700 rounded-3xl">
+        {Array.from(Array(11).keys()).map((i) => {
+          let t_html = `${i}`.padStart(2, "0").repeat(10)+`<p style="font-size: 100px">&#${127872+i};</p>`;
+          return <div key={i} className=" m-4 p-6 hover:scale-[108%] hover:delay-0 transition ease-in-out delay-1000 duration-1000 bg-slate-600 border-red-800 text-red-500 text-center rounded-2xl" dangerouslySetInnerHTML={{__html: t_html}}/>;
+        })}
+      </div>
 
       <footer className={styles.footer}>
         <a href="https://rainbow.me" rel="noopener noreferrer" target="_blank">
