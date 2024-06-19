@@ -17,6 +17,8 @@ import {
   optimism,
   polygon,
   sepolia,
+  hardhat,
+  Chain,
 } from "wagmi/chains";
 import {
   getDefaultConfig,
@@ -32,6 +34,15 @@ import {
 } from "@rainbow-me/rainbowkit/wallets";
 import { useRouter } from "next/router";
 
+const hardhat_node = {
+  ...hardhat,
+  id: 31338,
+  name: 'HarthatNode',
+  rpcUrls: {
+    default: { http: ['http://127.0.0.1:8545'] },
+  },
+} as const satisfies Chain;
+
 const config = getDefaultConfig({
   appName: "RainbowKit App",
   projectId: "YOUR_PROJECT_ID",
@@ -41,6 +52,8 @@ const config = getDefaultConfig({
     optimism,
     arbitrum,
     base,
+    hardhat,
+    hardhat_node,
     ...(process.env.NEXT_PUBLIC_ENABLE_TESTNETS === "true" ? [sepolia] : []),
   ],
   ssr: true,
@@ -80,7 +93,7 @@ function MyApp({ Component, pageProps }: AppProps<{ session: Session }>) {
               modalSize="wide"
               coolMode
               locale={locale}
-              initialChain={sepolia}
+              initialChain={hardhat_node}
               theme={darkTheme({
                 ...midnightTheme.accentColors.blue,
                 accentColor: "#7b3fe4",
