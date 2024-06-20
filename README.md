@@ -35,6 +35,6 @@ forge script --chain anvil-hardhat script/NFT.s.sol:MyScript --fork-url http://l
 forge test --match-path test/Create2.t.sol -vvvv
 
 # chisel repl
-anvil --chain-id 31338
-cast send -f 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 --value 1000000000000000000000 --private-key 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80 -r http://127.0.0.1:8545 --chain 31338 0x60032940e657251315d7eb3CF019fC860BDe0bC6 # value: 1000e18
+anvil --accounts 20 --balance 100000 --chain-id 31338 --host 0.0.0.0
+cast send -f 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 --value 1000000000000000000000 --private-key 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80 -r http://192.168.0.99:8545 --chain 31338 0x60032940e657251315d7eb3CF019fC860BDe0bC6 # value: 1000e18
 ```

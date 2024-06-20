@@ -2,78 +2,24 @@ import "../styles/globals.css";
 import "@rainbow-me/rainbowkit/styles.css";
 import type { AppProps } from "next/app";
 
-import {
-  RainbowKitSiweNextAuthProvider,
-  GetSiweMessageOptions,
-} from "@rainbow-me/rainbowkit-siwe-next-auth";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { RainbowKitSiweNextAuthProvider } from "@rainbow-me/rainbowkit-siwe-next-auth";
+import { QueryClientProvider } from "@tanstack/react-query";
 import { WagmiProvider } from "wagmi";
 import { SessionProvider } from "next-auth/react";
 import type { Session } from "next-auth";
 import {
-  arbitrum,
-  base,
-  mainnet,
-  optimism,
-  polygon,
-  sepolia,
-  hardhat,
-  Chain,
-} from "wagmi/chains";
-import {
-  getDefaultConfig,
   RainbowKitProvider,
   darkTheme,
   midnightTheme,
   Locale,
 } from "@rainbow-me/rainbowkit";
-import {
-  metaMaskWallet,
-  rainbowWallet,
-  walletConnectWallet,
-} from "@rainbow-me/rainbowkit/wallets";
 import { useRouter } from "next/router";
 
-const hardhat_node = {
-  ...hardhat,
-  id: 31338,
-  name: 'HarthatNode',
-  rpcUrls: {
-    default: { http: ['http://127.0.0.1:8545'] },
-  },
-} as const satisfies Chain;
-
-const config = getDefaultConfig({
-  appName: "RainbowKit App",
-  projectId: "YOUR_PROJECT_ID",
-  chains: [
-    mainnet,
-    polygon,
-    optimism,
-    arbitrum,
-    base,
-    hardhat,
-    hardhat_node,
-    ...(process.env.NEXT_PUBLIC_ENABLE_TESTNETS === "true" ? [sepolia] : []),
-  ],
-  ssr: true,
-  wallets: [
-    {
-      groupName: "Current",
-      wallets: [metaMaskWallet],
-    },
-    {
-      groupName: "Recommended",
-      wallets: [rainbowWallet, walletConnectWallet],
-    },
-  ],
-});
-
-const client = new QueryClient();
-
-const getSiweMessageOptions: GetSiweMessageOptions = () => ({
-  statement: "Sign in to the RainbowKit + SIWE example app",
-});
+import config, {
+  hardhat_node,
+  client,
+  getSiweMessageOptions,
+} from "./_config";
 
 function MyApp({ Component, pageProps }: AppProps<{ session: Session }>) {
   const { locale } = useRouter() as { locale: Locale };
@@ -81,7 +27,7 @@ function MyApp({ Component, pageProps }: AppProps<{ session: Session }>) {
     <WagmiProvider config={config}>
       <SessionProvider
         basePath="/frontend/api/auth"
-        baseUrl="http://127.0.0.1:3000"
+        baseUrl="http://192.168.0.99:3000"
         refetchInterval={0}
         session={pageProps.session}
       >

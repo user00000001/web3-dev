@@ -7,6 +7,8 @@ function Nav() {
       <Link className=" bg-gray-300 px-3 rounded-md" href={"/examples/modal-hooks"}>Modal Hooks</Link>
       <Link className=" bg-gray-300 px-3 rounded-md" href={"/examples/custom-connectbutton"}>Custom ConnectButton</Link>
       <Link className=" bg-gray-300 px-3 rounded-md" href={"/examples/send-transaction"}>Send Transaction</Link>
+      <Link className=" bg-gray-300 px-3 rounded-md" href={"/examples/this-is-md"}>MD</Link>
+      <Link className=" bg-gray-300 px-3 rounded-md" href={"/examples/this-is-mdx"}>MDX</Link>
     </div>
   );
 }
