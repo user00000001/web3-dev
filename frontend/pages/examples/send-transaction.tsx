@@ -4,18 +4,30 @@ import {
   BaseError,
   useAccount,
   useBalance,
+  useBlockNumber,
   useSendTransaction,
   useWaitForTransactionReceipt,
 } from "wagmi";
 import { formatUnits, parseEther } from "viem";
+import { useQueryClient } from "@tanstack/react-query";
 
 function SendTransaction() {
   const [to, setto] = useState<`0x${string}`>();
   const { address: from } = useAccount();
-  const { data: from_balance, refetch: from_refetch } = useBalance({
+  const queryClient = useQueryClient();
+  const { data: blockNumber } = useBlockNumber({ watch: true });
+  const {
+    data: from_balance,
+    refetch: from_refetch,
+    queryKey,
+  } = useBalance({
     address: from,
   });
-  const { data: to_balance, refetch: to_refetch } = useBalance({ address: to });
+  const {
+    data: to_balance,
+    refetch: to_refetch,
+    queryKey: to_queryKey,
+  } = useBalance({ address: to });
   const {
     data: hash,
     error,
@@ -34,8 +46,11 @@ function SendTransaction() {
     useWaitForTransactionReceipt({ hash });
   useEffect(() => {
     to_refetch();
-    from_refetch();
+    // from_refetch(); // using queryClient now
   }, [isConfirmed, to_refetch, from_refetch]);
+  useEffect(() => {
+    queryClient.invalidateQueries({ queryKey }); // refetch data again
+  }, [blockNumber, queryKey, queryClient]);
   return (
     <>
       <CustomNav></CustomNav>
@@ -76,12 +91,25 @@ function SendTransaction() {
                 }}
               />
             </div>
-            <div>
-              {"owns "}
-              {to_balance
-                ? formatUnits(to_balance?.value, to_balance?.decimals)
-                : 0}{" "}
-              ETH
+            <div className="flex">
+              <span className="w-1/2">
+                {"owns "}
+                {to_balance
+                  ? formatUnits(to_balance?.value, to_balance?.decimals)
+                  : 0}{" "}
+                ETH
+              </span>
+              <button
+                type="button"
+                className=" w-1/2 bg-slate-400 px-5 rounded-lg border border-black hover:scale-105"
+                onClick={async () => {
+                  await queryClient.invalidateQueries({
+                    queryKey: to_queryKey,
+                  });
+                }}
+              >
+                refresh
+              </button>
             </div>
           </div>
           <div className="flex flex-col">
@@ -106,11 +134,10 @@ function SendTransaction() {
           </div>
         </form>
         <div className=" divide-y-2 divide-pink-400 divide-dashed divide-opacity-50">
-          {hash && (
-            <div className="text-purple-800 text-center">
-              Transaction Hash: {hash}
-            </div>
-          )}
+          <div className="text-purple-800 text-center flex justify-around">
+            {blockNumber && <div>BlockNumber: {blockNumber.toString()}</div>}
+            {hash && <div className="">Transaction Hash: {hash}</div>}
+          </div>
           {isPending && <div className="">Waiting for Submit...</div>}
           {isConfirming && <div className="">Waiting for confirmation...</div>}
           {isConfirmed && <div>Transaction confirmed.</div>}
