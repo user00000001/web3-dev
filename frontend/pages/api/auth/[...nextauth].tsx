@@ -29,9 +29,16 @@ export function getAuthOptions(req: IncomingMessage): NextAuthOptions {
 
           const nextAuthHost = new URL(nextAuthUrl).host;
           const nextAuthHost1 = new URL(
-            nextAuthUrl.replace("127.0.0.1", "localhost")
+            nextAuthUrl.replace(/(127.0.0.1|192.168.0.99)/s, "localhost")
           ).host;
-          if (siwe.domain !== nextAuthHost && siwe.domain !== nextAuthHost1) {
+          const nextAuthHost2 = new URL(
+            nextAuthUrl.replace(/(localhost|192.168.0.99)/s, "127.0.0.1")
+          ).host;
+          if (
+            siwe.domain !== nextAuthHost &&
+            siwe.domain !== nextAuthHost1 &&
+            siwe.domain !== nextAuthHost2
+          ) {
             return null;
           }
 

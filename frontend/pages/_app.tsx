@@ -3,6 +3,7 @@ import "@rainbow-me/rainbowkit/styles.css";
 import type { AppProps } from "next/app";
 
 import { RainbowKitSiweNextAuthProvider } from "@rainbow-me/rainbowkit-siwe-next-auth";
+import { PersistQueryClientProvider } from "@tanstack/react-query-persist-client";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { WagmiProvider } from "wagmi";
 import { SessionProvider } from "next-auth/react";
@@ -18,7 +19,7 @@ import { useRouter } from "next/router";
 import config, {
   hardhat_node,
   client,
-  getSiweMessageOptions,
+  getSiweMessageOptions
 } from "./_config";
 
 function MyApp({ Component, pageProps }: AppProps<{ session: Session }>) {
@@ -31,7 +32,11 @@ function MyApp({ Component, pageProps }: AppProps<{ session: Session }>) {
         refetchInterval={0}
         session={pageProps.session}
       >
-        <QueryClientProvider client={client}>
+        {/* <PersistQueryClientProvider
+          client={client}
+          persistOptions={{ persister }}
+        > */}
+          <QueryClientProvider client={client}>
           <RainbowKitSiweNextAuthProvider
             getSiweMessageOptions={getSiweMessageOptions}
           >
@@ -52,7 +57,8 @@ function MyApp({ Component, pageProps }: AppProps<{ session: Session }>) {
               <Component {...pageProps} />
             </RainbowKitProvider>
           </RainbowKitSiweNextAuthProvider>
-        </QueryClientProvider>
+          </QueryClientProvider>
+        {/* </PersistQueryClientProvider> */}
       </SessionProvider>
     </WagmiProvider>
   );

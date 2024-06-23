@@ -16,6 +16,10 @@ import {
 } from "@rainbow-me/rainbowkit/wallets";
 import { QueryClient } from "@tanstack/react-query";
 import { GetSiweMessageOptions } from "@rainbow-me/rainbowkit-siwe-next-auth";
+import { createSyncStoragePersister } from "@tanstack/query-sync-storage-persister";
+import { createAsyncStoragePersister } from "@tanstack/query-async-storage-persister";
+import { deserialize, serialize } from "wagmi";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const hardhat_node = {
   ...hardhat,
@@ -42,7 +46,7 @@ const config = getDefaultConfig({
   ssr: true,
   wallets: [
     {
-      groupName: "Current",
+      groupName: "Installed", // other value will set to Installed in page.
       wallets: [metaMaskWallet],
     },
     {
@@ -52,15 +56,29 @@ const config = getDefaultConfig({
   ],
 });
 
-const client = new QueryClient();
+const client = new QueryClient({
+  defaultOptions: {
+    queries: {
+      gcTime: 1_000 * 60 * 60 * 24, // 24 hours
+    },
+  },
+});
+
+// const persister = createSyncStoragePersister({ // should not be used in nextjs(ssr)
+//   serialize,
+//   storage: window.localStorage,
+//   deserialize,
+// });
+
+// const persister_a = createAsyncStoragePersister({
+//   serialize,
+//   storage: AsyncStorage,
+//   deserialize,
+// });
 
 const getSiweMessageOptions: GetSiweMessageOptions = () => ({
   statement: "Sign in to the RainbowKit + SIWE example app",
 });
 
 export default config;
-export {
-    hardhat_node,
-    client,
-    getSiweMessageOptions
-};
+export { hardhat_node, client, getSiweMessageOptions };

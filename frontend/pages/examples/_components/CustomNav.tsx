@@ -9,6 +9,8 @@ function Nav() {
       <Link className=" bg-gray-300 px-3 rounded-md" href={"/examples/send-transaction"}>Send Transaction</Link>
       <Link className=" bg-gray-300 px-3 rounded-md" href={"/examples/this-is-md"}>MD</Link>
       <Link className=" bg-gray-300 px-3 rounded-md" href={"/examples/this-is-mdx"}>MDX</Link>
+      <Link className=" bg-gray-300 px-3 rounded-md" href={"/examples/fetch-queries"}>FetchQueries</Link>
+      <Link className=" bg-gray-300 px-3 rounded-md" href={"/examples/test-page"}>Test Page</Link>
     </div>
   );
 }
