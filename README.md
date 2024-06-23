@@ -37,4 +37,7 @@ forge test --match-path test/Create2.t.sol -vvvv
 # chisel repl
 anvil --accounts 20 --balance 100000 --chain-id 31338 --host 0.0.0.0
 cast send -f 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 --value 1000000000000000000000 --private-key 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80 -r http://192.168.0.99:8545 --chain 31338 0x60032940e657251315d7eb3CF019fC860BDe0bC6 # value: 1000e18
+
+forge create contracts/ERC20Test.sol:ERC20Test --rpc-url=http://localhost:8545 --private-key=0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80 --constructor-args 18
+cast send --rpc-url=http://localhost:8545 --private-key=0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80 0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9 "mint(address,uint256)" 0x60032940e657251315d7eb3CF019fC860BDe0bC6 1000000000000000000000 # value: 1000e18
 ```
