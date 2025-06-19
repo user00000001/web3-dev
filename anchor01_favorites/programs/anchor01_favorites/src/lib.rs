@@ -1,3 +1,4 @@
+#![allow(deprecated, unexpected_cfgs)]
 pub mod constants;
 pub mod error;
 pub mod instructions;
@@ -6,7 +7,6 @@ pub mod state;
 use anchor_lang::prelude::*;
 
 pub use instructions::*;
-pub use state::*;
 
 declare_id!("AUxB23jcR3Sijo9xx8i5mes9uqEjM77GNfj6kgJKh3bt");
 
@@ -20,6 +20,6 @@ pub mod anchor01_favorites {
         color: String,
         hobbies: Vec<String>,
     ) -> Result<()> {
-        instructions::set_favorites(ctx, number, color, hobbies)
+        set_favorites_(ctx, number, color, hobbies)
     }
 }

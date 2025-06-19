@@ -17,7 +17,7 @@ pub struct SetFavorites<'info> {
     system_program: Program<'info, System>,
 }
 
-pub fn set_favorites(
+pub fn set_favorites_(
     ctx: Context<SetFavorites>,
     number: u64,
     color: String,
