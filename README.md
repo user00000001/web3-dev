@@ -26,3 +26,9 @@ ablrun anchor keys sync
 ablrun anchor deploy
 ablrun anchor test --skip-local-validator --skip-deploy
 ```
+
+## use create-solana-dapp to create a project.
+
+```bash
+create-solana-dapp --pm pnpm --skip-git --skip-install anchor03_blinks
+```
