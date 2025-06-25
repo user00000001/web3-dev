@@ -18,16 +18,19 @@ export const crud_one = atom({
 export function CrudCreate() {
   const { createMutation } = useCrudProgram()
   const [crud, setCrud] = useAtom(crud_one)
-  return <div className={"block spacing-y-2 border-2 justify-round-2"}>
-    <div className="">
-      <label htmlFor="title">title:</label>
-      <input type="text" id="title" placeholder="title like `hello`" value={crud.title} onChange={(e)=>setCrud({...crud, title: e.target.value})} />
+  return <div className={"flex flex-col rounded-sm gap-2 justify-around"}>
+    <div className='w-auto flex justify-around ml-2 mr-2'>
+      <label htmlFor="title" className='capitalize w-1/6'>title:</label>
+      <input type="text" id="title" className=' ml-3 border-2 hover:border-yellow-500 focus:outline-fuchsia-600 w-full border-blue-400 bg-cyan-200 rounded-sm' placeholder="title like `hello`" value={crud.title} onChange={(e)=>setCrud({...crud, title: e.target.value})} />
     </div>
-    <div>
-      <label htmlFor="msg">message:</label>
-      <textarea id="msg" placeholder="some content." defaultValue={crud.message} onChange={(e)=>setCrud({...crud, message: e.target.value})}/>
+    <div className='flex flex-row justify-around ml-2 mr-2'>
+      <label htmlFor="msg" className='capitalize self-center w-1/6'>message:</label>
+      <textarea id="msg" placeholder="some content." className=' ml-3 w-full hover:border-yellow-500 border-2 border-blue-400 focus:outline-fuchsia-600 rounded-sm bg-cyan-200' value={crud.message} onChange={(e)=>setCrud({...crud, message: e.target.value})}/>
     </div>
-    <Button onClick={() => createMutation.mutateAsync(crud)} disabled={createMutation.isPending}>
+    <Button className='w-1/4 self-center' onClick={() => {
+      createMutation.mutateAsync(crud);
+      setCrud({owner:"", title:"", message:""})
+    }} disabled={createMutation.isPending}>
       Create {createMutation.isPending && '...'}
     </Button>
  </div>
@@ -99,10 +102,10 @@ function CrudCard({ account }: { account: PublicKey }) {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <div className="border-red-1">
-          <label>
+        <div className="justify-center bg-blue-100 border-amber-200 border-2 rounded-sm capitalize mb-5">
+          <label className='flex mx-2 items-center'>
             message:
-            <textarea onChange={(e)=>setCrud({...crud, message: e.target.value})} defaultValue={crud.message}/>
+            <textarea className='w-full m-2 border-2 rounded-sm border-red-400 focus:outline-fuchsia-600' onChange={(e)=>setCrud({...crud, message: e.target.value})} defaultValue={crud.message}/>
           </label>
         </div>
         <div className="flex gap-4">
