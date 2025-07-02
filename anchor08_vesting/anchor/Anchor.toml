@@ -1,0 +1,21 @@
+[toolchain]
+package_manager = "yarn"
+
+[features]
+resolution = true
+skip-lint = false
+
+[programs.localnet]
+attack_treasury_token_account = "6MrrNQQxtMBDHUeqpiwjiGqYK74qxqsbLNuJC5299Tbf"
+vesting = "5NpmkFTKGmJFGyUUFomuqUScU8V6bZCQhKiiygQ58b3L"
+
+[registry]
+url = "https://api.apr.dev"
+
+[provider]
+cluster = "localnet"
+wallet = "~/.config/solana/id.json"
+
+[scripts]
+test = "../node_modules/.bin/jest --preset ts-jest"
+attack_treasury_token_account = "../node_modules/.bin/esrun programs/attack_treasury_token_account/src/attack_treasury_token_account.ts"
