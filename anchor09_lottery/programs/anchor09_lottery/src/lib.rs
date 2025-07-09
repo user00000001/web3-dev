@@ -10,7 +10,7 @@ pub use constants::*;
 pub use instructions::*;
 pub use state::*;
 
-declare_id!("7GHmbVNeqBQfpwwtr9dNWijVUVG9TovaEJJJRYz7wcob");
+declare_id!("AFJpxWy8BSDnWS7RKuMPBbdb89GmhxzQzDxnbrw6Aj7X");
 
 #[program]
 pub mod anchor09_lottery {
@@ -31,5 +31,17 @@ pub mod anchor09_lottery {
 
     pub fn buy_ticket(ctx: Context<BuyTicket>) -> Result<()> {
         buy_ticket_(ctx)
+    }
+
+    pub fn commit_winner(ctx: Context<CommitWinner>) -> Result<()> {
+        commit_winner_(ctx)
+    }
+
+    pub fn choose_winner(ctx: Context<ChooseWinner>) -> Result<()> {
+        choose_winner_(ctx)
+    }
+
+    pub fn claim_prize(ctx: Context<ClaimPrize>) -> Result<()> {
+        claim_prize_(ctx)
     }
 }
