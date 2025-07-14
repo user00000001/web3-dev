@@ -15,6 +15,8 @@ hardhat006|hardhat usage, (Upgrades/DAOs/Security&Auditing)|[hardhat006](https:/
 hardhat007|full-stack web3|[hardhat007](https://github.com/user00000001/hardhat007)
 hardhat008|web3 full stack by create-web3-dapp|[hardhat008](https://github.com/user00000001/hardhat008)
 foundry00|solidity test (foundry) usage|[foundry00](https://github.com/user00000001/foundry00)
+solana-bootcamp-2024|anchor web3|[solana-bootcamp-2024](http://github.com/user00000001/web3-dev/tree/solana-bootcamp-2024)
+solana_rareskills|solana smart contract|[solana_rareskills](http://github.com/user00000001/web3-dev/tree/solana_rareskills)
 
 ## git worktree usage, while the others like submodule/subtree create more repos.
 
@@ -22,7 +24,7 @@ foundry00|solidity test (foundry) usage|[foundry00](https://github.com/user00000
 git worktree add -b/-B ${new-branch-name} ${worktree-path} ${branch-name}
 git worktree list
 git branch -vv
-git worktree remove [-f] ${worktree-path} 
+git worktree remove [-f] ${worktree-path}
 git worktree prune -n # just check worktree status
 git worktree prune -v
 git worktree move ${worktree-path} ${new-worktree-path}
