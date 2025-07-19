@@ -1,4 +1,4 @@
-# Solana Bootcamp 2024 practices.
+# [RareSkills Solana in 60 days](https://rareskills.io/solana-tutorial).
 
 ## use anchor init a new project(ablrun for the low glibc host such as deepin v23).
 
